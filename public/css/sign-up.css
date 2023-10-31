@@ -1,3 +1,10 @@
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1b1b1b;
+    color: white;
+  }
+}
+
 .sign-up-form {
   display: grid;
   width: 200px;
