@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/sign-up.css" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <h1>Sign up to join the club.</h1>
+
+    <form class="sign-up-form" method="post" action="">
+      <%# Display errors %> <% if (typeof errors !== 'undefined') {
+      errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) } %>
+
+      <label for="first-name">First name</label>
+      <input
+        id="first-name"
+        name="firstName"
+        type="text"
+        maxlength="100"
+        required="true"
+        value="<%= user.firstName %>"
+      />
+
+      <label for="last-name">Last name</label>
+      <input
+        id="last-name"
+        name="lastName"
+        type="text"
+        maxlength="100"
+        required="true"
+        value="<%= user.lastName %>"
+      />
+
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        maxlength="100"
+        required="true"
+        value="<%= user.email %>"
+      />
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        minlength="3"
+        maxlength="100"
+        required="true"
+      />
+
+      <label for="confirm-password">Confirm password</label>
+      <input
+        id="confirm-password"
+        name="confirmPassword"
+        type="password"
+        minlength="3"
+        maxlength="100"
+        required="true"
+      />
+
+      <label for="admin">I want to be an admin</label>
+      <input id="admin" name="admin" type="checkbox" <%= user.isAdmin ?
+      'checked' : '' %> />
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

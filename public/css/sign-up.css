@@ -1,0 +1,5 @@
+.sign-up-form {
+  display: grid;
+  width: 200px;
+  justify-items: start;
+}
