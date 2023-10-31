@@ -47,10 +47,10 @@ async function connectToMongoAtlas() {
   console.log('Connecting to MongoDB Atlas...');
   try {
     await mongoose.connect(mongoString);
+    console.log('Connected to MongoDB Atlas.');
   } catch (error) {
     console.log(error);
   }
-  console.log('Connected to MongoDB Atlas.');
 }
 
 connectToMongoAtlas()
