@@ -1,0 +1,1 @@
+- Verify mongoDB connection in console on server start
