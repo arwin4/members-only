@@ -10,7 +10,7 @@ const User = require('../models/user');
 const Message = require('../models/message');
 
 const user1 = new User({
-  email: 'a@a',
+  username: 'a@a',
   password: 'pass123',
   firstName: 'First',
   lastName: 'Last',

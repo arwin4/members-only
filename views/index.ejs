@@ -7,6 +7,19 @@
   </head>
   <body>
     <h1>Welcome to the club house</h1>
+
+    <% if (currentUser) { %>
+    <h1>test</h1>
+    <% } %>
+
     <a href="/sign-up">Sign up here</a>
+
+    <form method="post" action="/log-in">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" required />
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required />
+      <button type="submit">Log in</button>
+    </form>
   </body>
 </html>

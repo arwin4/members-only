@@ -4,10 +4,11 @@
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 const User = require('../models/user');
 
 exports.index = asyncHandler(async (req, res) => {
-  res.render('index');
+  res.render('index', { user: req.user });
 });
 
 exports.signUp = asyncHandler(async (req, res) => {
@@ -18,6 +19,7 @@ exports.signUp = asyncHandler(async (req, res) => {
   res.render('signup', { user: {} });
 });
 
+// TODO: prevent multiple signups with same email
 exports.signUpPost = [
   // Sanitize and validate
   body('firstName')
@@ -30,7 +32,7 @@ exports.signUpPost = [
     .isLength({ min: 1, max: 100 })
     .withMessage(`Last name may be no longer than 100 characters`)
     .escape(),
-  body('email')
+  body('username')
     .trim()
     .isEmail()
     .withMessage(`Please ensure you've entered a valid email address`),
@@ -51,7 +53,7 @@ exports.signUpPost = [
     const user = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      email: req.body.email,
+      username: req.body.username,
       isAdmin: req.body.admin === 'on',
     });
 
@@ -66,7 +68,7 @@ exports.signUpPost = [
     }
 
     // Encrypt password
-    bcrypt.hash(user, 10, async (err, hashedPassword) => {
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
       // TODO: implement error display for users
       if (err) {
         return next(err);
@@ -75,5 +77,16 @@ exports.signUpPost = [
       await user.save();
     });
     res.redirect('/');
+  }),
+];
+
+exports.logIn = [
+  // asyncHandler(async (req, res) => {
+  //   console.log('test');
+  // }),
+  // console.log('tests'),
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/',
   }),
 ];

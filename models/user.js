@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 // TODO: More Schema validation
 
 const UserSchema = new Schema({
-  email: {
+  username: {
     type: String,
     required: true,
     maxLength: [100, 'Email must not exceed 100 characters'],
