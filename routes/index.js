@@ -13,4 +13,8 @@ router.get('/sign-up', clubController.signUp);
 // Handle signup submission
 router.post('/sign-up', clubController.signUpPost);
 
+router.get('/become-a-member', clubController.becomeAMember);
+
+router.post('/become-a-member', clubController.becomeAMemberSubmit);
+
 module.exports = router;

@@ -81,3 +81,28 @@ exports.signUpPost = [
     res.redirect('/');
   }),
 ];
+
+exports.becomeAMember = asyncHandler(async (req, res) => {
+  res.render('becomeAMember');
+});
+
+exports.becomeAMemberSubmit = [
+  body('password').trim().escape(),
+
+  asyncHandler(async (req, res) => {
+    if (req.body.password === 'open sesame') {
+      try {
+        await User.findByIdAndUpdate(res.locals.currentUser._id, {
+          isMember: true,
+        });
+      } catch (err) {
+        throw new Error('Unable to assign membership status');
+      }
+      res.redirect('/become-a-member');
+    } else {
+      res.render('becomeAMember', {
+        wrongPasswordMessage: 'Wrong password, please try again.',
+      });
+    }
+  }),
+];
