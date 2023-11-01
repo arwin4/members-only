@@ -19,7 +19,10 @@
     <% } %>
 
     <a href="/sign-up">Sign up here</a>
+
+    <% if (currentUser) { %>
     <a href="/session/log-out">Log out</a>
+    <% } %>
 
     <form method="post" action="/session/log-in">
       <label for="username">Email</label>
