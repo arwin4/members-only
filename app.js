@@ -101,11 +101,13 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
+let mongoConnectionSuccessful = false;
+
 async function connectToMongoAtlas() {
   console.log('Connecting to MongoDB Atlas...');
   try {
     await mongoose.connect(mongoString);
-    console.log('Connected to MongoDB Atlas.');
+    mongoConnectionSuccessful = true;
   } catch (error) {
     console.log(error);
   }
@@ -113,7 +115,11 @@ async function connectToMongoAtlas() {
 
 connectToMongoAtlas()
   .then(() => {
-    console.log('Server started.');
+    console.log('Server has finished starting.');
+    // eslint-disable-next-line no-unused-expressions
+    mongoConnectionSuccessful
+      ? console.log('Connection to MongoDB Atlas successful.')
+      : console.log('Connection to MongoDB Atlas FAILED.');
   })
   .catch((err) => console.log(err));
 
