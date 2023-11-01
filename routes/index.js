@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport');
 
 const router = express.Router();
 
@@ -13,14 +12,5 @@ router.get('/sign-up', clubController.signUp);
 
 // Handle signup submission
 router.post('/sign-up', clubController.signUpPost);
-
-// // Handle login
-// router.post(
-//   '/log-in',
-//   passport.authenticate('local', {
-//     successRedirect: '/success',
-//     failureRedirect: '/failure',
-//   }),
-// );
 
 module.exports = router;

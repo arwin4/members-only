@@ -10,8 +10,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 
-const indexRouter = require('./routes/index');
-
 const app = express();
 
 // Import secrets
@@ -27,8 +25,6 @@ const User = require('./models/user');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Passport functions
-
 app.use(
   session({ secret: sessionSecret, resave: false, saveUninitialized: true }),
 );
@@ -36,6 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+/** Passport functions start */
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
@@ -45,7 +42,6 @@ passport.use(
       }
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        // passwords do not match!
         return done(null, false, { message: 'Incorrect password' });
       }
       return done(null, user);
@@ -68,6 +64,9 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+/** Passport functions end */
+
+// Make currentUser object available throughout app
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
@@ -79,26 +78,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
+const indexRouter = require('./routes/index');
+const sessionRouter = require('./routes/session');
+
 app.use('/', indexRouter);
-
-// Handle login
-app.post(
-  '/log-in',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/',
-  }),
-);
-
-// Handle logout
-app.get('/log-out', (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
-});
+app.use('/session', sessionRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
