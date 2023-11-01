@@ -19,7 +19,6 @@ exports.signUp = asyncHandler(async (req, res) => {
   res.render('signup', { user: {} });
 });
 
-// TODO: prevent multiple signups with same email
 exports.signUpPost = [
   // Sanitize and validate
   body('firstName')
@@ -35,7 +34,11 @@ exports.signUpPost = [
   body('username')
     .trim()
     .isEmail()
-    .withMessage(`Please ensure you've entered a valid email address`),
+    .withMessage(`Please ensure you've entered a valid email address`)
+    .custom(async (value) => {
+      const userAlreadyExists = await User.findOne({ username: value });
+      if (userAlreadyExists) throw new Error('E-mail already in use');
+    }),
   body('password')
     .isLength({ min: 3, max: 100 })
     .withMessage(
