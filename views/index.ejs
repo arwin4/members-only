@@ -10,12 +10,12 @@
 
     <% if (currentUser) { %>
     <h1>You are logged in.</h1>
-    <% } else { %>
-    <h1>You are not logged in.</h1>
-    <% } %> <% if (currentUser.isMember) { %>
+    <% if (currentUser.isMember) { %>
     <h1>You are a member.</h1>
     <% } else { %>
     <h1>You are not yet a member.</h1>
+    <% } %> <% } else { %>
+    <h1>You are not logged in.</h1>
     <% } %>
 
     <a href="/sign-up">Sign up here</a>
