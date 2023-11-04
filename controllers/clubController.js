@@ -4,10 +4,13 @@
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const moment = require('moment');
 const User = require('../models/user');
+const Message = require('../models/message');
 
 exports.index = asyncHandler(async (req, res) => {
-  res.render('index', { user: req.user });
+  const messages = await Message.find().exec();
+  res.render('index', { user: req.user, messages, moment });
 });
 
 exports.signUp = asyncHandler(async (req, res) => {
