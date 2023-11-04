@@ -1,0 +1,33 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1b1b1b;
+    color: white;
+  }
+}
+
+h1 {
+  font-size: 1.3rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+body {
+  font-size: 0.9rem;
+}
+
+form {
+  display: grid;
+  width: 200px;
+  row-gap: 5px;
+  justify-items: start;
+}

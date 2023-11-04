@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Club house</title>
+
+  <!-- Style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
 </head>
 
 <body>
@@ -42,15 +49,15 @@
 
   <div class="messages">
     <% for (const message of messages) { %>
-      <div class="message">
+    <div class="message">
 
-        <h2 class="message-title"><%= message.title %></h2>
-        <h3 class="message-date"><%= moment(message.date).format('dddd, MMMM Do YYYY, hh:mm') %></h3>
-        <% if (typeof currentUser !== 'undefined' && currentUser.isMember) { %>
-          <h4><%= message.author %> wrote</h4>
-          <h4 class="message-content"><%= message.content %></h4>
-        <% } %>
-      </div>
+      <h2 class="message-title"><%= message.title %></h2>
+      <h3 class="message-date"><%= moment(message.date).format('dddd, MMMM Do YYYY, hh:mm') %></h3>
+      <% if (typeof currentUser !== 'undefined' && currentUser.isMember) { %>
+      <h4><%= message.author %> wrote</h4>
+      <h4 class="message-content"><%= message.content %></h4>
+      <% } %>
+    </div>
     <% } %>
   </div>
 </body>

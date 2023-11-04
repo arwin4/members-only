@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Become a full-fledged member</title>
-  </head>
-  <body>
-    <%# User not logged in %> <% if (!currentUser) { %>
-    <h1>
-      If you want to become a full member, please <a href="/">log in</a> first.
-    </h1>
 
-    <%# User logged in, not a member yet %> <% } else if (!currentUser.isMember)
-    { %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Become a full-fledged member</title>
 
-    <h1>Enter the secret password to become a member.</h1>
-    <h2>You'll be able to post messages on the board.</h2>
-    <p>Hint: &#477;&#623;&#592;s&#477;s u&#477;do</p>
+  <!-- Style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
 
-    <%# Wrong password entered %> <% if (typeof wrongPasswordMessage !==
+</head>
+
+<body>
+  <%# User not logged in %>
+  <% if (!currentUser) { %>
+  <h1>
+    If you want to become a full member, please <a href="/">log in</a> first.
+  </h1>
+
+  <%# User logged in, not a member yet %>
+  <% } else if (!currentUser.isMember) { %>
+
+  <h1>Enter the secret password to become a member.</h1>
+  <h2>You'll be able to post messages on the board.</h2>
+  <p>Hint: &#477;&#623;&#592;s&#477;s u&#477;do</p>
+
+  <%# Wrong password entered %>
+  <% if (typeof wrongPasswordMessage !==
     'undefined' && wrongPasswordMessage) { %> <%= wrongPasswordMessage %> <% }
     %>
 
-    <form method="post" action="/become-a-member">
-      <input type="text" name="password" id="password" />
-      <button type="submit">Submit</button>
+  <form method="post" action="/become-a-member">
+    <input type="text" name="password" id="password" />
+    <button type="submit">Submit</button>
 
-      <%# User is a member %> <% } else if (currentUser.isMember) { %>
-      <h1>
-        Congratulations, you're a member! You're now able to post messages.
-      </h1>
-      <h2><a href="/">Return to home</a></h2>
-      <% } %>
-    </form>
-  </body>
+    <%# User is a member %>
+    <% } else if (currentUser.isMember) { %>
+    <h1>
+      Congratulations, you're a member! You're now able to post messages.
+    </h1>
+    <h2><a href="/">Return to home</a></h2>
+    <% } %>
+  </form>
+</body>
+
 </html>
