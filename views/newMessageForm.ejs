@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write a new message</title>
+</head>
+
+<body>
+  <% if (typeof currentUser === 'undefined') { %>
+  You must be logged in to write a message.
+  <a href="/">Back to home</a>
+  <% } else { %>
+
+  <h1>Write a new message</h1>
+  <h2>Your name, <%= currentUser.fullName %>, will appear along with your message.</h2>
+
+  <form method="post" action="" class="new-message">
+
+    <label for="title">Message title (50 characters maximum)</label>
+    <input name="title" id="title" placeholder="Title" type="text" maxlength="50" required>
+
+    <label for="message">Write a message (500 character maximum)</label>
+    <textarea name="message" id="message" placeholder="Your message here..." maxlength="500" cols="30" rows="3"
+      required></textarea>
+
+    <button type="submit">Send</button>
+
+  </form>
+
+  <% } %>
+</body>
+
+</html>

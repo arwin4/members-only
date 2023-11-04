@@ -25,6 +25,7 @@
 
   <% if (currentUser) { %>
   <a href="/session/log-out">Log out</a>
+  <a href="/message/write">Write a message</a>
   <% } else { %>
   <form class="sign-up-form" method="post" action="/session/log-in">
     <label for="username">Email</label>

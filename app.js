@@ -81,9 +81,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 const indexRouter = require('./routes/index');
 const sessionRouter = require('./routes/session');
+const messageRouter = require('./routes/message');
 
 app.use('/', indexRouter);
 app.use('/session', sessionRouter);
+app.use('/message', messageRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
