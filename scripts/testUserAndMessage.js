@@ -6,20 +6,30 @@ require('dotenv').config();
 
 const mongoString = process.env.MONGODB_CONNECTION_STRING;
 
-const User = require('../models/user');
 const Message = require('../models/message');
 
-const user1 = new User({
-  username: 'a@a',
-  password: 'pass123',
-  firstName: 'First',
-  lastName: 'Last',
+const message1 = new Message({
+  title: 'A title',
+  content: 'Some content',
+  author: 'Some guy',
 });
 
-const message1 = new Message({
-  title: 'The Title',
-  content: 'Some content',
-  author: user1._id,
+const message2 = new Message({
+  title: 'Another Title',
+  content: 'More content for message 2',
+  author: 'Somebody',
+});
+
+const message3 = new Message({
+  title: 'Message Title 3',
+  content: 'Content for the third message',
+  author: 'Some gal',
+});
+
+const message4 = new Message({
+  title: 'Important Announcement',
+  content: 'This is an important message with important content.',
+  author: 'Mr. President',
 });
 
 async function main() {
@@ -31,11 +41,12 @@ async function main() {
   }
   console.log('Connected. Populating database...');
   try {
-    await Promise.all([user1.save(), message1.save()]);
-    console.log(`Added user ${user1.fullName} (id ${user1._id})`);
-    console.log(
-      `Added message ${message1.title} by ${user1.fullName} (id ${message1.author})`,
-    );
+    await Promise.all([
+      message1.save(),
+      message2.save(),
+      message3.save(),
+      message4.save(),
+    ]);
   } catch (error) {
     console.log(error);
   }
