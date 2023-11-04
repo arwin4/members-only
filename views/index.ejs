@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Club house</title>
-  </head>
-  <body>
-    <h1>Welcome to the club house</h1>
 
-    <% if (currentUser) { %>
-    <h1>You are logged in.</h1>
-    <% if (currentUser.isMember) { %>
-    <h1>You are a member.</h1>
-    <% } else { %>
-    <h1>You are not yet a member.</h1>
-    <% } %> <% } else { %>
-    <h1>You are not logged in.</h1>
-    <a href="/sign-up">Sign up here</a>
-    <% } if (currentUser) { %>
-    <a href="/session/log-out">Log out</a>
-    <% } else { %>
-    <form method="post" action="/session/log-in">
-      <label for="username">Email</label>
-      <input type="email" name="username" id="username" required />
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" required />
-      <button type="submit">Log in</button>
-    </form>
-    <% } %> <% if (typeof currentUser !== 'undefined' && !currentUser.isMember)
-    { %>
-    <a href="/become-a-member">Become a full-fledged member to post messages</a>
-    <% } %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club house</title>
+</head>
 
-    <div class="messages"></div>
-  </body>
+<body>
+  <h1>Welcome to the club house</h1>
+
+  <% if (currentUser) { %>
+  <h1>You are logged in.</h1>
+
+  <% if (currentUser.isMember) { %>
+  <h1>You are a member.</h1>
+  <% } %>
+
+  <% else { %>
+  <h1>You are not yet a member.</h1>
+  <% } %>
+  <% } %>
+
+  <% else { %>
+  <h1>You are not logged in.</h1>
+  <a href="/sign-up">Sign up here</a>
+  <% } %>
+
+  <% if (currentUser) { %>
+  <a href="/session/log-out">Log out</a>
+  <% } %>
+
+  <% else { %>
+  <form class="sign-up-form" method="post" action="/session/log-in">
+    <label for="username">Email</label>
+    <input type="email" name="username" id="username" required />
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required />
+    <button type="submit">Log in</button>
+  </form>
+  <% } %>
+
+  <% if (typeof currentUser !=='undefined' && !currentUser.isMember) { %>
+  <a href="/become-a-member">Become a full-fledged member to post messages</a>
+  <% } %>
+
+  <div class="messages"></div>
+</body>
+
 </html>
