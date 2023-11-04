@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-// TODO: More Schema validation?
-
 const MessageSchema = Schema({
   title: {
     type: String,
@@ -18,8 +16,12 @@ const MessageSchema = Schema({
     required: true,
   },
   date: { type: Date, default: Date.now },
-  // TODO: Find out if following validation is correct, and necessary
-  author: { type: mongoose.Schema.Types.ObjectId },
+  author: {
+    type: String,
+    minLength: [1, 'Message must have at least 1 character'],
+    maxLength: [500, 'Message must not exceed 500 characters'],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Message', MessageSchema);
