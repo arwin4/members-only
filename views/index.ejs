@@ -61,6 +61,9 @@
       <h4><%= message.author %> wrote</h4>
       <h5 class="message-content"><%= message.content %></h4>
       <% } %>
+      <% if (typeof currentUser !== 'undefined' && currentUser.isAdmin) { %>
+        <button onclick="window.location.href='/message/delete/<%=message.id%>'">Delete</button>
+      <% } %>
     </div>
     <% } %>
   </div>

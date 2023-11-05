@@ -64,3 +64,22 @@ exports.messageSubmit = [
     }
   }),
 ];
+
+exports.messageDelete = asyncHandler(async (req, res, next) => {
+  if (!res.locals.currentUser.isAdmin) {
+    try {
+      throw new Error('You must be an admin to delete a message');
+    } catch (err) {
+      return next(err);
+    }
+  }
+
+  const messageId = req.params.id;
+  try {
+    await Message.findByIdAndDelete(messageId).exec();
+  } catch (err) {
+    return next(err);
+  }
+
+  res.redirect('/');
+});
