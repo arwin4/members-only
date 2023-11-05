@@ -4,16 +4,16 @@
 const passport = require('passport');
 
 // Handle login
-// TODO: show success/failure to user
 exports.logIn = (req, res, next) => {
+  req.session.messages = [];
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/',
+    failureRedirect: '/login-error',
+    failureMessage: true,
   })(req, res, next);
 };
 
 // Handle logout
-// TODO: show successful logout to user
 exports.logOut = (req, res, next) => {
   req.logout((err) => {
     if (err) {

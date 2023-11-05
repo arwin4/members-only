@@ -39,6 +39,7 @@
   <% } %>
   <% } else { %>
   <form class="log-in-form" method="post" action="/session/log-in">
+    <% if (typeof sessionMessage !== 'undefined') %> <%= sessionMessage %>
     <label for="username">Email</label>
     <input type="email" name="username" id="username" required />
     <label for="password">Password</label>

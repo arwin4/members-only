@@ -7,6 +7,8 @@ const clubController = require('../controllers/clubController');
 // Render index
 router.get('/', clubController.index);
 
+router.get('/login-error', clubController.loginError);
+
 // Render signup
 router.get('/sign-up', clubController.signUp);
 

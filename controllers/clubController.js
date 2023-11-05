@@ -10,7 +10,24 @@ const Message = require('../models/message');
 
 exports.index = asyncHandler(async (req, res) => {
   const messages = await Message.find().exec();
-  res.render('index', { user: req.user, messages, moment });
+  // Prevent login errors from persisting
+  req.session.messages = [];
+  res.render('index', {
+    user: req.user,
+    messages,
+    sessionMessage: req.session.messages,
+    moment,
+  });
+});
+
+exports.loginError = asyncHandler(async (req, res) => {
+  const messages = await Message.find().exec();
+  res.render('index', {
+    user: req.user,
+    messages,
+    sessionMessage: req.session.messages,
+    moment,
+  });
 });
 
 exports.signUp = asyncHandler(async (req, res) => {
