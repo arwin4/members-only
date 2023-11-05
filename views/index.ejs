@@ -21,18 +21,21 @@
   <h1>You are logged in.</h1>
 
   <% if (currentUser.isMember) { %>
-  <h1>You are a member.</h1>
+  <h2>You are a member.</h1>
   <% } else { %>
-  <h1>You are not yet a member.</h1>
+  <h2>You are not yet a member.</h1>
+  <h3>Only members can post messages.</h2>
   <% } %>
   <% } else { %>
-  <h1>You are not logged in.</h1>
+  <h2>You are not logged in.</h1>
   <a href="/sign-up">Sign up here</a>
   <% } %>
 
   <% if (currentUser) { %>
   <a href="/session/log-out">Log out</a>
-  <a href="/message/write">Write a message</a>
+  <% if (currentUser.isMember) { %>
+    <a href="/message/write">Write a message</a>
+  <% } %>
   <% } else { %>
   <form class="sign-up-form" method="post" action="/session/log-in">
     <label for="username">Email</label>
@@ -44,7 +47,7 @@
   <% } %>
 
   <% if (typeof currentUser !=='undefined' && !currentUser.isMember) { %>
-  <a href="/become-a-member">Become a full-fledged member to post messages</a>
+  <a href="/become-a-member">Become a full-fledged member</a>
   <% } %>
 
   <div class="messages">
@@ -53,9 +56,9 @@
 
       <h2 class="message-title"><%= message.title %></h2>
       <h3 class="message-date"><%= moment(message.date).format('dddd, MMMM Do YYYY, hh:mm') %></h3>
-      <% if (typeof currentUser !== 'undefined' && currentUser.isMember) { %>
+      <% if (currentUser) { %>
       <h4><%= message.author %> wrote</h4>
-      <h4 class="message-content"><%= message.content %></h4>
+      <h5 class="message-content"><%= message.content %></h4>
       <% } %>
     </div>
     <% } %>

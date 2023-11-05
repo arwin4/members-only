@@ -15,8 +15,8 @@
 </head>
 
 <body>
-  <% if (typeof currentUser === 'undefined') { %>
-  You must be logged in to write a message.
+  <% if (typeof currentUser === 'undefined' || !currentUser.isMember) { %>
+  You must be logged in and be a member to write a message.
   <a href="/">Back to home</a>
   <% } else { %>
 

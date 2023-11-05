@@ -38,6 +38,12 @@ exports.messageSubmit = [
       } catch (err) {
         return next(err);
       }
+    } else if (!user.isMember) {
+      try {
+        throw new Error('You must be a member to post a message.');
+      } catch (err) {
+        return next(err);
+      }
     }
 
     // Show error(s) and repopulate fields if validation fails
