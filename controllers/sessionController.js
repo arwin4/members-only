@@ -5,6 +5,9 @@ const passport = require('passport');
 
 // Handle login
 exports.logIn = (req, res, next) => {
+  // Normalize email
+  req.body.username = req.body.username.toLowerCase();
+  // Empty old error messages
   req.session.messages = [];
   passport.authenticate('local', {
     successRedirect: '/',

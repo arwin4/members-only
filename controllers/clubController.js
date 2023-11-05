@@ -54,6 +54,7 @@ exports.signUpPost = [
     .trim()
     .isEmail()
     .withMessage(`Please ensure you've entered a valid email address`)
+    .toLowerCase()
     .custom(async (value) => {
       const userAlreadyExists = await User.findOne({ username: value });
       if (userAlreadyExists) throw new Error('E-mail already in use');
